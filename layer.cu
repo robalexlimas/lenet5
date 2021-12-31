@@ -41,8 +41,7 @@ void averagePooling2d(float *input, float *output, int width, int height, int sh
 __global__
 void dense(float *input, float *output, float *weights, float *bias, int activation_name, int units) {
     const int x = blockIdx.x * blockDim.x + threadIdx.x;
-    const int z = blockIdx.z * blockDim.z + threadIdx.z;
-    if (x > units || z > units) return;
+    if (x > units) return;
 
     float result = input[x] * weights[x] + bias[x];
     void (*activation)(int) = activation_function(activation_name);
